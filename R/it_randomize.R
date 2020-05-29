@@ -11,7 +11,11 @@
 #' corresponding element value in `matr`
 #'
 #' @details
-#' Follows alogrithm as described in Ulrich and Gotelli 2010
+#' Follows alogrithm as described in Ulrich and Gotelli 2010.
+#' As per this source "IT assigns individuals randomly to matrix
+#' cells with probabilities proportional to observed row and
+#' column abundance totals until, for each row and column, total
+#' abundances are reached."
 #'
 it_randomize <- function(matr){
 
