@@ -31,7 +31,7 @@ it_randomize <- function(matr, n_iter = 10000){
   # placed value of 1 until
   # the new_mat sum is the same as the original matrix
   iter <- 0
-  while((sum(new_mat) < sum(matr) | iter < n_iter)){
+  while(sum(new_mat) < sum(matr)){
     # make a random matrix
     # this is done by randomly choosing a matrix index value, weighted
     # by the expected matrix values at each index
@@ -54,11 +54,16 @@ it_randomize <- function(matr, n_iter = 10000){
 
     # Increase the iter number
     iter <- iter + 1
+
+    # Check if we've reached the max iterations
+    if(iter >= n_iter){
+      break()
+    }
   }
 
-  if(iter != n_iter){
-    return(new_mat)
-  } else {
+  if(iter == n_iter){
     return(NA)
+  } else {
+    return(new_mat)
   }
 }

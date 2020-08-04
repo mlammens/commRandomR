@@ -4,10 +4,12 @@
 \alias{it_randomize}
 \title{Randomize a matrix using the IT algorithm}
 \usage{
-it_randomize(matr)
+it_randomize(matr, n_iter = 10000)
 }
 \arguments{
 \item{matr}{A community matrix to be randomized.}
+
+\item{n_iter}{Number of iterations to attempt to randomize the matrix.}
 }
 \value{
 A randomized version of `matr` where the row
