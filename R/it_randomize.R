@@ -4,6 +4,7 @@
 #' More info needed here
 #'
 #' @param matr A community matrix to be randomized.
+#' @param n_iter Number of iterations to attempt to randomize the matrix.
 #'
 #' @return A randomized version of `matr` where the row
 #' and column totals match that of `matr`, and the values
@@ -17,7 +18,7 @@
 #' column abundance totals until, for each row and column, total
 #' abundances are reached."
 #'
-it_randomize <- function(matr){
+it_randomize <- function(matr, n_iter = 10000){
 
   # perform chisq test to get expected values
   #matr_exp <- chisq.test(matr)$expected
@@ -29,7 +30,8 @@ it_randomize <- function(matr){
   # use a while loop to add matrices with a single, randomly
   # placed value of 1 until
   # the new_mat sum is the same as the original matrix
-  while(sum(new_mat) < sum(matr)){
+  iter <- 0
+  while((sum(new_mat) < sum(matr) | iter < n_iter)){
     # make a random matrix
     # this is done by randomly choosing a matrix index value, weighted
     # by the expected matrix values at each index
@@ -49,7 +51,14 @@ it_randomize <- function(matr){
     # Re-adjust the weight matrix to remove rows or columns that are already filled
     rows2zero <- as.numeric(!(rowSums(new_mat) - rowSums(matr) == 0))
     matr_exp <- rows2zero * matr_exp
+
+    # Increase the iter number
+    iter <- iter + 1
   }
 
-  return(new_mat)
+  if(iter != n_iter){
+    return(new_mat)
+  } else {
+    return(NA)
+  }
 }
